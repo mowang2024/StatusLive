@@ -53,41 +53,6 @@
       </el-dialog>
 
       <el-card shadow="always" class="all-status-card" v-loading="table_loading">
-        <!-- 数据中心 -->
-        <h4 class="card-title">数据中心<span style="font-size:1rem">&nbsp;DataCenter</span></h4>
-        
-
-        <el-table :data="this.datacenter_table" style="width: 100%;" @cell-click="table_click">
-          <el-table-column label="状态" width="50" min-width="40">
-            <template slot-scope="scope">
-              <div v-html="scope.row.status_html" @click="show_respontime(scope.row)"></div>
-            </template>
-          </el-table-column>
-
-          <el-table-column label="可用率" width="90" min-width="70">
-            <template slot-scope="scope">
-              <b><span v-bind:class="scope.row.custom_uptime_ratio_class" @click="show_respontime(scope.row)">{{scope.row.custom_uptime_ratio}}%</span></b>
-            </template>
-          </el-table-column>
-
-          <el-table-column label="名称" width="110" min-width="70">
-            <template slot-scope="scope">
-              <b><div v-html="scope.row.friendly_name"  @click="show_respontime(scope.row)"></div></b>
-            </template>
-          </el-table-column>
-
-          <el-table-column :label="'详细可用率（过去'+json.config_history_time+'天）'" min-width="670">
-            <template slot-scope="scope">
-              <el-tooltip class="" effect="dark" :content="range.time + ' ' + range.range + '%'" placement="top" v-for="range in scope.row.custom_uptime_ranges_a" :key="range.key">
-                <span class="square" v-bind:class="[range.info ==1 ? 'info-bg' : (range.range > json.config_success_min ? 'success-bg' : (range.range > json.config_warning_min ? 'warning-bg' : 'danger-bg'))]"></span>
-              </el-tooltip>
-            </template>
-          </el-table-column>
-        </el-table>
-      </el-card>
-
-
-      <el-card shadow="always" class="all-status-card" v-loading="table_loading">
         <!-- 网站 -->
         <h4 class="card-title">网站<span style="font-size:1rem">&nbsp;WebSite</span></h4>
         
@@ -121,39 +86,6 @@
         </el-table>
       </el-card>
 
-      <el-card shadow="always" class="all-status-card" v-loading="table_loading">
-        <!-- 服务 -->
-        <h4 class="card-title">服务<span style="font-size:1rem">&nbsp;Service</span></h4>
-        
-
-        <el-table :data="this.service_table" style="width: 100%;" @cell-click="table_click">
-          <el-table-column label="状态" width="50" min-width="40">
-            <template slot-scope="scope">
-              <div v-html="scope.row.status_html"></div>
-            </template>
-          </el-table-column>
-
-          <el-table-column label="可用率" width="90" min-width="70">
-            <template slot-scope="scope">
-              <b><span v-bind:class="scope.row.custom_uptime_ratio_class">{{scope.row.custom_uptime_ratio}}%</span></b>
-            </template>
-          </el-table-column>
-
-          <el-table-column label="名称" width="110" min-width="70">
-            <template slot-scope="scope">
-              <b><div v-html="scope.row.friendly_name" @click="show_respontime(scope.row)"></div></b>
-            </template>
-          </el-table-column>
-
-          <el-table-column :label="'详细可用率（过去'+json.config_history_time+'天）'" min-width="670">
-            <template slot-scope="scope">
-              <el-tooltip class="" effect="dark" :content="range.time + ' ' + range.range + '%'" placement="top" v-for="range in scope.row.custom_uptime_ranges_a" :key="range.key" size="large" color="activity.color">
-                <span class="square" :class="[range.info == 1 ? 'info-bg' : (range.range > json.config_success_min ? 'success-bg ' : (range.range > json.config_warning_min ? 'warning-bg' : 'danger-bg'))]"></span>
-              </el-tooltip>
-            </template>
-          </el-table-column>
-        </el-table>
-      </el-card>
 
       <el-card v-loading="table_loading">
         <el-row :gutter="5">
